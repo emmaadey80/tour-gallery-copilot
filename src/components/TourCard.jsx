@@ -5,7 +5,12 @@ const TourCard = ({ id, name, info, image, price, onRemove }) => {
 
     return (
         <div className="tour-card">
-            <img src={image} alt={name} className="tour-image" />
+            <img
+                src={image}
+                alt={name}
+                className="tour-image"
+                onError={(e) => (e.target.src = '/fallback-image.jpg')} // Fallback image
+            />
             <div className="tour-details">
                 <h2 className="tour-name">{name}</h2>
                 <p className="tour-info">
