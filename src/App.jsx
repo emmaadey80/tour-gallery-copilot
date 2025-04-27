@@ -1,23 +1,6 @@
 import { useState, useEffect } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import Gallery from './components/Gallery';
 import './App.css';
-
-function Gallery({ tours }) {
-  return (
-    <div className="gallery">
-      <h2>Tours</h2>
-      {tours.map((tour) => (
-        <div key={tour.id} className="tour">
-          <h3>{tour.name}</h3>
-          <p>{tour.info}</p>
-          <p>Price: ${tour.price}</p>
-          <img src={`https://api.allorigins.win/raw?url=${tour.image}`} alt={tour.name} className="tour-image" />
-        </div>
-      ))}
-    </div>
-  );
-}
 
 function App() {
   const [tours, setTours] = useState([]);
@@ -45,6 +28,10 @@ function App() {
     fetchTours();
   }, []);
 
+  const removeTour = (id) => {
+    setTours((prevTours) => prevTours.filter((tour) => tour.id !== id));
+  };
+
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -53,22 +40,20 @@ function App() {
     return <h2>Error: {error}</h2>;
   }
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+  if (tours.length === 0) {
+    return (
+      <div className="no-tours">
+        <h2>No Tours Left</h2>
+        <button onClick={() => window.location.reload()}>Refresh</button>
       </div>
-      <h1>Vite + React</h1>
-      <Gallery tours={tours} />
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    );
+  }
+
+  return (
+    <main>
+      <h1>Our Tours</h1>
+      <Gallery tours={tours} onRemove={removeTour} />
+    </main>
   );
 }
 

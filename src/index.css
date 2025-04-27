@@ -82,9 +82,8 @@ button:focus-visible {
   margin-top: 12px;
 }
 
-.read-more-btn,
-.remove-btn {
-  background-color: #007bff;
+.read-more-btn {
+  background-color: #007bff; /* Blue for "Read More" */
   color: white;
   border: none;
   padding: 8px 12px;
@@ -92,9 +91,22 @@ button:focus-visible {
   cursor: pointer;
 }
 
-.read-more-btn:hover,
+.read-more-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.remove-btn {
+  background-color: #ff1100; /* Red for "Not Interested" */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px; /* Add spacing between buttons */
+}
+
 .remove-btn:hover {
-  background-color: #0056b3;
+  background-color: #cc0e00; /* Darker red on hover */
 }
 
 .no-tours {
