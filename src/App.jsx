@@ -3,6 +3,21 @@ import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
 
+function Gallery({ tours }) {
+  return (
+    <div className="gallery">
+      <h2>Tours</h2>
+      {tours.map((tour) => (
+        <div key={tour.id} className="tour">
+          <h3>{tour.name}</h3>
+          <p>{tour.info}</p>
+          <p>Price: ${tour.price}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function App() {
   const [tours, setTours] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -48,16 +63,7 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
-      <div className="card">
-        <h2>Tours</h2>
-        {tours.map((tour) => (
-          <div key={tour.id}>
-            <h3>{tour.name}</h3>
-            <p>{tour.info}</p>
-            <p>Price: ${tour.price}</p>
-          </div>
-        ))}
-      </div>
+      <Gallery tours={tours} />
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
